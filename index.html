@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="utf-8"> 
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="src/js/flexible.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<title>压力计算</title>
+		<style>
+			#app {
+				height: 100vh;
+				display: flex;
+				align-items: center;
+			}
+			#app .list {
+				font-size: 0.5rem;
+				max-width: 414px;
+				margin: 0 auto;
+			}
+			#app .list li{
+				margin: 0.3rem 0;
+			}
+			#app .list span{
+				display: inline-block;
+				width: 3.2rem;
+			}
+		</style>
+	</head> 
+	<body>
+		<div id="app">
+			<ul class="list">
+				<li><span>运行压力：</span><input v-model="base" type="number"></li>
+				<li><span>监控压力：</span> {{ jkyl }}</li>
+				<li><span>关闭压力: </span> {{ gbyl }}</li>
+				<li><span>热备运行压力:</span>  {{ rbyxyl }}</li>
+				<li><span>热备监控压力:</span> {{ rbjkyl }}</li>
+			</ul>
+			
+		</div>
+
+	</body>
+	<script>
+		var app = new Vue({
+		el: '#app',
+		data: {
+			base: 0
+		},
+		computed: {
+			jkyl() {
+				return (this.base * 1.1).toFixed(3)
+			},
+			gbyl() {
+				return (this.base * 1.25).toFixed(3)
+			},
+			rbyxyl() {
+				return `${(this.base * 0.9).toFixed(3)} ~ ${(this.base * 0.95).toFixed(3)}`
+			},
+			rbjkyl() {
+				return (this.base * 1.1).toFixed(3)
+			},
+		}
+		})
+	</script>
+</html>
